@@ -10,6 +10,7 @@ import { WelcomeComponent } from './home/welcome.component';
 import { ConvertToSpacesPipe } from './shared/convert-to-space.pipe';
 import { StarComponent } from './shared/star.compenent';
 import { ProductDetailComponent } from './products/product-detail.component';
+import { ProductDetailGuard } from './products/product-detail.guard';
 
 
 @NgModule({
@@ -27,7 +28,11 @@ import { ProductDetailComponent } from './products/product-detail.component';
     HttpClientModule,
     RouterModule.forRoot([
       { path: 'products', component: ProductListComponent },
-      { path: 'products/:id', component: ProductDetailComponent},
+      { 
+        path: 'products/:id',
+        canActivate: [ProductDetailGuard],
+        component: ProductDetailComponent
+      },
       { path: 'welcome', component: WelcomeComponent },
       { path: '**', redirectTo: 'welcome', pathMatch: 'full' }
     ])
